@@ -1,0 +1,3 @@
+1.在一个组件中this关键字指当前组件的实例,通过this.props.attrName可以取得当前组件的属性值，
+通过this.props.children可以取得当前组件的嵌套元素，详情见index.js中的例子一
+2.要将js语句放在{}中，放在{}中的语句会被会用js规则解析
