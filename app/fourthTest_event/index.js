@@ -44,21 +44,14 @@ ReactDOM.render(<ContentForm/>,document.getElementById('content'));
 var ContentBox = React.createClass({
     getInitialState:function(){
         return {
-            data:""
+            data:[]
         }
     },
     formSubmit:function(addContent){
-        var list;
-        if(this.state.data){
-             list =  this.state.data + "&" + addContent;
-        }else{
-            list = addContent;
-        }
-
+        var list = this.state.data.concat([addContent]);
         this.setState({
             data:list
         });
-
     },
    render:function(){
        return (
@@ -96,12 +89,7 @@ var From = React.createClass({
 });
 var List = React.createClass({
     render:function(){
-        var listArr;
-        if(this.props.item){
-             listArr = this.props.item.split("&");
-        }else{
-            listArr = [];
-        }
+        var listArr = this.props.item;
         var list = listArr.map(function(item){
             return <li>{item}</li>
         });
