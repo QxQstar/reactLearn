@@ -7,7 +7,7 @@ var Content = React.createClass({
     render:function(){
         return (
             <div>
-                <h1>{this.props.author}</h1>
+                <h2>{this.props.author}</h2>
                 <span>{this.props.time}</span>
                 <p>{this.props.children}</p>
             </div>
@@ -20,3 +20,31 @@ ReactDOM.render(
                 </Content>,
                 document.getElementById('content')
                 );
+
+
+//例子二
+var ContentItem = React.createClass({
+        render:function(){
+            return (
+                <li className='item'>
+                    <span>{this.props.name}</span>
+                    <span>{this.props.age}</span>
+                    <span>{this.props.desc}</span>
+                </li>
+            );
+    }
+});
+var data=[
+    {"age":"20","name":"Lisa","description":"一个优秀的作家"},
+    {"age":"23","name":"jon","description":"一个新晋作家"}
+]
+var ContentList = React.createClass({
+    render:function(){
+      var content = this.props.data.map(function(data){
+           return <ContentItem name={data.name} age={data.age} desc={data.description}/>
+       });
+        return (<ul className='list'>{content}</ul>);
+    }
+});
+
+ReactDOM.render(<ContentList data={data}/>,document.getElementById('list'));
