@@ -63,20 +63,14 @@ var ContentBox = React.createClass({
    }
 });
 var From = React.createClass({
-    getInitialState:function(){
-        return {
-            text:""
-        }
-    },
+    text:"",
     insertListItem:function(event){
         event.preventDefault();
-        var item =  this.state.text;
+        var item =  this.text;
         this.props.onContentSubmit(item);
     },
     changeText:function(event){
-        this.setState({
-            text:event.target.value
-        });
+        this.text = event.target.value;
     },
     render:function(){
         return (
