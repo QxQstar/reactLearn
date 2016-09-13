@@ -1,8 +1,6 @@
 1.react 组件名要以一个大写字母开头
 2.ReactDOM.render()接受两个参数，一个参数是组件，第二个参数为一个dom节点
-3.如果要使用React.render()将两个及两个以上的react组件渲染到同一个DOM节点中，
- 则要将这些react组件包裹到另一个标签中。还可以使用另一个方式达到上述效果??将其他组件放到另一个组件的
- render方法的return中,详情见first.js的例子二
+3.react组件仅仅渲染单一的根节点，如果想要返回多个节点，必须将它们包裹在一个根里。如index.js中的例子二
 4.React.createClass():创建一个新的react组件，React.createClass()接受一个键值对形式的对象作为参数。组件中
 最重要的方法是render方法，它返回一个将要渲染到html中的react组件树
 5.ReactDOM.render()要写在组件声明之后

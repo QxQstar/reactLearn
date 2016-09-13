@@ -3,6 +3,7 @@
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
     <file url="file://$PROJECT_DIR$/app/firstTest/first.js" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/app/firstTest/笔记.txt" charset="GB2312" />
+    <file url="file://$PROJECT_DIR$/app/secondTest_useProps/index.js" charset="UTF-8" />
   </component>
 </project>
 

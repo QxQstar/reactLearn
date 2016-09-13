@@ -1,0 +1,7 @@
+1.每个组件的props被渲染过一次就不可变了，但是组件的state可以改变，每一个组件都有this.state，组件的state
+可以通过this.setState()改变，当组件的state发生改变时，组件会重新渲染它自己。在静态功能中不要使用state，例子一
+和例子二中只是为了做演示
+2.getInitialState()用来设置组件的初始状态，在组件的生命周期只被执行一次。详情见index.js例子一
+3.componentDidMount()是一个react组件被渲染后立即自动调用的方法
+4.在例子二中，给组件ContentList设置了初始state为data，它是一个空数组，在首次渲染后调用componentDidMount()方法
+改变data，详情见index.js例子二
