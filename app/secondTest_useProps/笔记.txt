@@ -4,3 +4,10 @@
 3.组件的render()方法只能返回一个合法的react元素或者null，如果返回数组，undefined或者
 其他不合法的对象就会出错。例如，使用es5中的map()方法遍历数组时，将遍历的结果保存在
 一个变量中，然后将这个变量嵌套在另一个react元素中。详情见index.js例子二
+4.给组件的属性赋值：有两种方法：
+                        a.  <Component name='li' age='12'/>
+                        b.  var props = {
+                                name:"li",
+                                age:"12"
+                            }
+                            <Component {...props}/>

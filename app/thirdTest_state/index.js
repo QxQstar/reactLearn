@@ -22,9 +22,11 @@ ReactDOM.render(<Content1/>,document.getElementById('content1'));
 //    Àý×Ó¶þ
 var ContentList = React.createClass({
     getInitialState:function(){
+        alert('kk');
         return {
             data:[]
-        }
+        };
+
     },
     componentDidMount:function(){
         var _self = this;

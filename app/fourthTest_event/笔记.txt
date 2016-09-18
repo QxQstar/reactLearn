@@ -3,3 +3,4 @@
 下方的列表中。实现方法：将一个函数赋值给Form组件的onContentSubmit属性，当触发表单提交按钮时，在提交表单的
 事件处理程序中调用onContentSubmit()方法，onContentSubmit()用于改变组件的state,将组件的state赋值给List组件
 的item属性,List组合用于处理内容。详情见index.js例子二
+3.可以给组件的属性赋任何合法的数据类型值，如函数，数组，数字等

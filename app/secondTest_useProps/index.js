@@ -37,7 +37,7 @@ var ContentItem = React.createClass({
 var data=[
     {"age":"20","name":"Lisa","description":"一个优秀的作家"},
     {"age":"23","name":"jon","description":"一个新晋作家"}
-]
+];
 var ContentList = React.createClass({
     render:function(){
       var content = this.props.data.map(function(data){
