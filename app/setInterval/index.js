@@ -3,14 +3,8 @@
  */
 var DisplayTime = React.createClass({
     getInitialState:function(){
-        var date = new Date();
         return {
-            y:date.getFullYear(),
-            m:date.getMonth() + 1,
-            d:date.getDate(),
-            h:date.getHours(),
-            mi:date.getMinutes(),
-            s:date.getSeconds()
+            time:false
         }
     },
     componentDidMount:function(){
@@ -19,20 +13,27 @@ var DisplayTime = React.createClass({
     changeTime:function(){
         var _self = this;
         setInterval(function(){
-            var date = new Date();
             _self.setState({
-                y:date.getFullYear(),
-                m:date.getMonth() + 1,
-                d:date.getDate(),
-                h:date.getHours(),
-                mi:date.getMinutes(),
-                s:date.getSeconds()
+                time:!_self.state.time
             });
         },1000);
     },
     render:function(){
+        var date = new Date();
+        var time = {
+            y:date.getFullYear(),
+            m:date.getMonth() + 1,
+            d:date.getDate(),
+            h:date.getHours(),
+            mi:date.getMinutes(),
+            s:date.getSeconds()
+        };
         return (
-            <p>It is{this.state.y}-{this.state.m}-{this.state.d}-{this.state.h}-{this.state.mi}-{this.state.s}</p>
+                <div>
+                    <input type='text'/>
+                    <p>It is{time.y}-{time.m}-{time.d}-{time.h}-{time.mi}-{time.s}</p>
+                </div>
+
             );
     }
 });

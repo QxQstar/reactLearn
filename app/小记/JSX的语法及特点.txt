@@ -1,8 +1,43 @@
 1.自定义的组件首字母必须大写，如果组件的首字母是小写，那么react会把它当作dom的自带元素名，如：div,span
 等
 2.组件可以嵌套
-3.要将求值表达式在放在花括号中，当时不能将语句放在花括号中
+3.要将求值表达式在放在花括号中，但是不能将语句放在花括号中
 4.给组件设置样式属性：将样式对象用一个花括号包裹，然后赋值给组件的style属性。例如：
 <Content style={{fontSize:"12px"}}/>
 5.由于不能在花括号中使用if语句，但是可以在花括号中使用三元表达式来实现判断的效果，也可以使用或
 运算实现判断的效果
+6.在react中，并不是必须使用JSX，也可以直接使用JS
+7.给组件设置class和for，要使用className和htmlFor代替
+8.实例化组件，可以使用JSX的形式创建组件，也可以使用JS的形式创建组件
+    JSX：
+    var Nav,Profile;
+    var app = <Nav color = "blue">
+                   <Profile>click</Profile>
+              </Nav>;
+    JS:
+    var Nav,Profile;
+    var app  = React.createElement(Nav,{color:"blue"},
+                                        React.createElement(Profile,null,"click");
+    注：变量Nav，Profile必须在作用域范围内
+9.当将一个JS表达式作为一个属性值，那么需要将这个js表达式用{}包裹起来。如果属性值是一个布尔值，那么要将这个布尔值用{}
+包裹起来
+    例如：
+        <input type="button" disabled />;
+        <input type="button" disabled={true} />;
+10.添加注释。jSX有三种注释
+        1.给子组件添加注释
+            <div>
+                {/*<input type='text'/>*/}
+                <p>It is{this.state.y}-{this.state.m}-{this.state.d}-{this.state.h}-{this.state.mi}-{this.state.s}</p>
+            </div>
+        2.多行注释
+            /*<div>
+                <input type='text'/>
+                <p>It is{this.state.y}-{this.state.m}-{this.state.d}-{this.state.h}-{this.state.mi}-{this.state.s}</p>
+              </div>*/
+        3.行末注释
+          <div>
+            <input type='text'/>
+            <p>It is{this.state.y}-{this.state.m}-{this.state.d}-{this.state.h}-{this.state.mi}-{this.state.s}</p>
+          </div>//行末注释
+11.如果要给自带的html元素添加自定义属性，要添加data-前缀，否则React不会render它们，对于自定义元素可以设置任何属性
