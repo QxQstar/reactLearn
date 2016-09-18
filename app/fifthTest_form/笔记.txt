@@ -1,0 +1,20 @@
+1.Form组件（如:<input>, <textarea>, and <option>）不同于其他自带组件,因为通过用户交互它们可以突变.这些组件提供的接口
+让它更简单的管理表单相应用户交互
+2.Form组件提供了一些受用户交互影响的属性
+        value，checked，selected
+3.Form组件当发生下面的这些情况将触发change事件，支持冒泡
+    a：<input> or <textarea>的value值变化
+    b:<input>的状态checked变化
+    c：<option>的状态selected变化
+4.一个受控制的<input>会有一个value属性，渲染一个受控制的<input>将会显示value属性的值。如例子一所示，用户输入在被
+渲染的元素上不会产生影响，因为React声明了value是hi。通过onChange事件，去更新value以至于响应用户输入，如例子二
+5.不受控制的input没有value属性，任何用户输入将立即显示出来。
+6.一个受控制的组件不会维护它的内部状态，组价的渲染单纯的依赖于属性。不受控制的组件会维护它的内部状态
+7.Default Value.如果想让一个初始化组件用一个非空的值，能够使用defaultValue属性
+    如：render：function(){
+            return <input type='text' defaultValue='hi'/>
+        }
+    <input type="checkbox"> 和 <input type="radio"> 支持 defaultChecked, <select> 支持 defaultValue
+
+defaultChecked和defaultValue仅仅在最初render时被使用，如果需要在后续的render中更新value值，需要使用受控制的组件
+8.

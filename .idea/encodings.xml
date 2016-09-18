@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false">
+    <file url="file://$PROJECT_DIR$/app/fifthTest_form/index.js" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/firstTest/first.js" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/app/firstTest/笔记.txt" charset="GB2312" />
     <file url="file://$PROJECT_DIR$/app/secondTest_useProps/index.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/setInterval/index.js" charset="UTF-8" />
   </component>
 </project>
 

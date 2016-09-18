@@ -1,0 +1,4 @@
+1.在React中，如果组件X在组件Y的render函数中被创建，那么Y拥有X
+2.当你创建一个React组件实例，你能在开便签和闭合标签之间添加额外的组件和js表达式，如：
+    <Parent><Child /></Parent>
+父组件通过this.props.children能够读取它的子组件
