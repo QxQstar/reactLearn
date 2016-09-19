@@ -1,0 +1,35 @@
+1.生命周期由三个阶段组成，分别是初始化阶段，运行中阶段和销毁阶段。这三者发生的时间是不固定的
+        初始化阶段：组件被插入到DOM树中
+        运行中阶段：如果DOM树需要被更新，组件被重新渲染
+        销毁阶段：组件从DOM树中被移除
+2.在初始化阶段可以使用的钩子函数有：getDefaultProps，getInitialState，componentWillMount，
+render，componentDidMount
+3.运行中阶段可以使用的钩子函数有：componentWillReceiveProps，shouldComponentUpdate，
+componentWillUpdate，render，componentDidUpdate
+4.销毁阶段可以使用的钩子函数有:componentWillUnmount
+5.初始化阶段钩子函数的介绍：
+    （1）getDefaultProps，只调用一次。不是在组件实例化的时候被调用，在组件创建的时候
+    （React.createClass）就调用了，调用之后React会把这个函数的返回结果保存起来，
+    从每个实例默认属性都是同一个结果。getDefaultProps函数返回的是一个引用，
+    所有实例共享这个返回的引用。
+    （2）getInitialState，初始化每个实例特有的状态。有状态的组件应该执行它，返回初始初始状态。
+    它必须返回一个对象或者null
+    （3）componentWillMount，在第一次调用render之前调用的方法，可以修改状态
+    （4）render，render的返回只能有一个顶层组件，在render中不要
+    修改状态和DOM输出
+    （5）componentDidMount，在第一次调用render之后调用的方法。在调用这个方法的时候DOM树已经渲染到
+    页面，在这个函数中可以修改DOM，在此之前都不能修改DOM，因为在此之前真正的DOM还没有被渲染到页面上
+ 这五个函数从上到下按顺序执行
+ 6.运行中阶段钩子函数的介绍：
+    （1）componentWillReceiveProps，当一个已经mounted的组件接受新的属性时触发，在这个函数中可以修改状态，修改新属性
+    （2）shouldComponentUpdate，在这个函数中，开发者可以决定组件是否更新，返回false可以阻止
+    render调用，如果返回false后面的三个函数都不会被执行。
+    （3）componentWillUpdate，在render之前执行，在这个函数中不能修改状态和属性
+    （4）render，render的返回只能有一个顶层组件，在render中不要
+     修改状态和DOM输出
+    （5）componentDidUpdate，在render之后调用，可以修改DOM
+  注这五个函数从上到下顺序执行
+ 7.销毁阶段钩子函数的介绍
+    （1）componentWillUnmount，在删除组件之前触发的函数，在这个函数中进行一些清理操作，比如说计时器
+    和事件监听器
+
