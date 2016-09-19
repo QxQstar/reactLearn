@@ -30,3 +30,12 @@
 
             var myComponentInstance = ReactDOM.render(myComponentElement, myContainer);
             myComponentInstance.doSomething();
+            （2）如果你很少用react开发应用，通常你倾向于使用ref去做一些事，如果是这样的话，稍等
+            片刻并且更严谨的思考，在组件的层次结构中应该拥有状态
+            （3）refs不能被附加到一个无状态函数中，因为它没有支持实例，你可以将一个无状态函数
+            包裹在一个标准的复合组件中，然后再这个复合组件中附加ref
+                无状态函数：
+                function HelloMessage(props) {
+                  return <div>Hello {props.name}</div>;
+                }
+                ReactDOM.render(<HelloMessage name="Sebastian" />, mountNode);

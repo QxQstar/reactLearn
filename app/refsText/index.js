@@ -48,3 +48,19 @@ var OutDiv = React.createClass({
 
 });
 ReactDOM.render(<OutDiv/>,document.getElementById('content4'));
+//例子五
+ReactDOM.render(<Div/>,document.getElementById('content5'));
+ReactDOM.render(<OutDiv/>,document.getElementById('content5'));
+//例子六
+var Liu = React.createClass({
+    render:function(){
+        return <StateLess ref='stateless'/>
+    },
+    componentDidMount:function(){
+        console.log(this.refs.stateless);
+    }
+});
+function StateLess(){
+    return <p>StateLess</p>
+}
+ReactDOM.render(<Liu/>,document.getElementById('content6'));
