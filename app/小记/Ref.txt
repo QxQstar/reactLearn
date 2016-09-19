@@ -1,0 +1,32 @@
+1.在创建组件之后，你可能想调用通过render返回的组件实例的方法。在大多数情况中，那是不必要的，因为数据流
+总是确保最新的属性被传递到通过render输出的每一个孩子组件。然而在少数情况下，那是需要的，所以React提供了refs。如果你要
+找到通过组件呈现的DOM标记，refs是有用的。
+2.The ref returned from ReactDOM.render。
+3.The ref Callback Attribute
+        （1）React支持一个特殊的属性，你能将它（ref）附加到任何通过render函数返回的组件上，组件的ref属性可以是一个回调函数，
+        当组件被mounted这个回调函数将立即被执行，被引用的组件将作为一个参数被传递，回调函数将立即使用组件，
+        或者保存在将来使用
+        （2）当给一个DOM组件（如：<div/>）附加一个ref，你会得到一个DOM节点。如果给一个复合组件附加一个ref，
+        将得到一个React类实例,在后一种情况中，你能够调用任何被暴露在类定义的组件方法。
+        （3）如果引用的组件被销毁或者ref改变，旧的ref将会被调用，null会作为参数
+4.The ref String Attribute
+        （1）字符串ref在将来可能会被弃用，回调函数ref是首选
+        （2）在任何组件中，React支持使用字符串作为ref属性
+5.为了得到React组件的引用，你能够使用this得到当前React组件，你也能够使用ref得到自己的组件的引用
+6.在复合组件中，引用将会参照组件类的实例，所以你能够调用在这个类里被定义的任何方法
+7.在某种程度上，ref是一个传递信息到特定子实例的好方法。
+8.使用ref的好处
+        （1）在你的组件类中，你能够定义任何公共方法，并且通过ref调用这些公共方法
+        （2）执行DOM测量经常需要接触自带的组件（如<input/>）和使用ref访问底层DOM节点
+        （3）ref自动管理。如果孩子被摧毁，它的ref也被摧毁
+9.使用ref的注意事项
+        （1）在render函数内部不要访问ref
+10.The ref returned from ReactDOM.render
+        （1）不要与你在组件中定义的render函数混淆，组件中的render返回一个虚拟的DOM节点，ReactDOM.render()返回一个你组件
+        的backing instance的引用。JSX不会返回组件实例，它仅仅返回ReactElement。
+            var myComponentElement = <MyComponent />; // This is just a ReactElement.
+
+            // Some code here...
+
+            var myComponentInstance = ReactDOM.render(myComponentElement, myContainer);
+            myComponentInstance.doSomething();
