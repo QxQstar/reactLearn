@@ -2,3 +2,92 @@
 2.当你创建一个React组件实例，你能在开便签和闭合标签之间添加额外的组件和js表达式，如：
     <Parent><Child /></Parent>
 父组件通过this.props.children能够读取它的子组件
+3.创建如下的组件：
+        var Avatar = React.createClass({
+          render: function() {
+            return (
+              <div>
+                <PagePic pagename={this.props.pagename} />
+                <PageLink pagename={this.props.pagename} />
+              </div>
+            );
+          }
+        });
+
+        var PagePic = React.createClass({
+          render: function() {
+            return (
+              <img src={'https://graph.facebook.com/' + this.props.pagename + '/picture'} />
+            );
+          }
+        });
+
+        var PageLink = React.createClass({
+          render: function() {
+            return (
+              <a href={'https://www.facebook.com/' + this.props.pagename}>
+                {this.props.pagename}
+              </a>
+            );
+          }
+        });
+
+        ReactDOM.render(
+          <Avatar pagename="Engineering" />,
+          document.getElementById('example')
+        );
+    （1）组件的所有权
+            在上面的例子中，Avatar的实例拥有PagePic的实例和PageLink的实例。在React中，组件的属性被它的拥有者设置。
+            更正式的讲：如果组件X再组件Y的render函数中被创建，那么可以说组件Y拥有组件X。组件不能改变它自己的属性，
+            组件的属性通常被它的拥有者设置
+    （2）父子关系和拥有者-被拥有者关系
+            在父子关系和拥有者-被拥有者关系之间做区分那是非常重要的。拥有者-被拥有者关系是特定于React，然后父子关系
+            来自于DOM。在上面的例子中，Avatar实例拥有div，PagePic和PageLink实例。div是PagePic和PageLink实例的父亲（
+            div并不拥有PagePic和PageLink实例
+            ）
+4.孩子
+    （1）如果你创建了一个React组件实例，你能够包含额外的React组件或者JS表达式在“<”和“>”之间，如下：
+        <Parent><Child /></Parent>
+     （2）Parent通过this.props.children能够访问它的Children
+     （3）this.props.children是一个透明数据结构，可以通过React.Children去操作他们
+5.Dynamic Children
+    （1）当Children被打乱或者有新的组件添加到列表后面，情况将变得更加的复杂。在这些情况中，当通过渲染通道
+    每个孩子的特性和状态必须保持，通过给每一个孩子添加一个key属性，你能够识别么一个孩子（key的值要不一样）
+    （2）react协调被keyed的孩子，它能够确保每一个设置过key属性的孩子还重新排序或者被摧毁
+    （3）key应该直接提供给数组中的组件，而不是数组中每一个组件的HTML孩子容器
+            如下：
+                // WRONG!
+                var ListItemWrapper = React.createClass({
+                  render: function() {
+                    return <li key={this.props.data.id}>{this.props.data.text}</li>;
+                  }
+                });
+                var MyComponent = React.createClass({
+                  render: function() {
+                    return (
+                      <ul>
+                        {this.props.results.map(function(result) {
+                          return <ListItemWrapper data={result}/>;
+                        })}
+                      </ul>
+                    );
+                  }
+                });
+
+                // Correct :)
+                var ListItemWrapper = React.createClass({
+                  render: function() {
+                    return <li>{this.props.data.text}</li>;
+                  }
+                });
+                var MyComponent = React.createClass({
+                  render: function() {
+                    return (
+                      <ul>
+                        {this.props.results.map(function(result) {
+                           return <ListItemWrapper key={result.id} data={result}/>;
+                        })}
+                      </ul>
+                    );
+                  }
+                });
