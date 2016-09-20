@@ -21,13 +21,16 @@ componentWillUpdate，render，componentDidUpdate
     页面，在这个函数中可以修改DOM，在此之前都不能修改DOM，因为在此之前真正的DOM还没有被渲染到页面上
  这五个函数从上到下按顺序执行
  6.运行中阶段钩子函数的介绍：
-    （1）componentWillReceiveProps，当一个已经mounted的组件接受新的属性时触发，在这个函数中可以修改状态，修改新属性
+    （1）componentWillReceiveProps，当一个已经mounted的组件接受新的属性时触发，它可以接受一个表示新属性对象的参数,
+    可以通过修改这个参数，达到修改新属性的目的，在这个函数中可以修改状态
     （2）shouldComponentUpdate，在这个函数中，开发者可以决定组件是否更新，返回false可以阻止
     render调用，如果返回false后面的三个函数都不会被执行。
-    （3）componentWillUpdate，在render之前执行，在这个函数中不能修改状态和属性
+    （3）componentWillUpdate，在render之前执行，在这个函数中不能修改状态和属性,它可以接受两个对象类型的参数，第一个参数
+    表示新的属性。第二个参数表示新的状态
     （4）render，render的返回只能有一个顶层组件，在render中不要
      修改状态和DOM输出
-    （5）componentDidUpdate，在render之后调用，可以修改DOM
+    （5）componentDidUpdate，在render之后调用，可以修改DOM。它可以接受两个对象类型的参数,第一个参数表示之前的属性，
+    第二个参数表示之前的状态
   注这五个函数从上到下顺序执行
  7.销毁阶段钩子函数的介绍
     （1）componentWillUnmount，在删除组件之前触发的函数，在这个函数中进行一些清理操作，比如说计时器
