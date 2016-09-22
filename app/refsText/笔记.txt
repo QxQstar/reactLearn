@@ -1,6 +1,6 @@
 1.组件的ref属性只有第一次render之后才能被访问
 2.将字符串ref附加给一个DOM组件（如，<div/>,<input/>等），通过this.refs.refName获得的是一个实际的DOM节点，如例子一
-3.将字符串ref附加给一个复合组件，通过this.refs.refName将获得一个React类实例，因此可以调用这个React类实例
+3.将字符串ref附加给一个复合组件，通过this.refs.refName将获得这一个React类实例，因此可以调用这个React类实例
 被暴露出的任何方法。如例子二
 4.将回调函数ref附加给一个DOM组件，这个回调函数在组件mounted之后立即调用，可以给这个回调函数传递一个参数，
 该参数指这个DOM节点。如例子三

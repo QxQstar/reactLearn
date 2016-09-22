@@ -14,16 +14,11 @@ var Content2 = React.createClass({
             );
     }
 });
+
 ReactDOM.render(<div>
                     <Content1/>
                     <Content2/>
-                </div>,
-                document.getElementById('content')
-               );
-
-
-
-
+                </div>,document.getElementById('content'));
     //Àý×Ó¶þ
 var Content3 = React.createClass({
     render:function(){
