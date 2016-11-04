@@ -7,7 +7,7 @@ var TextInput = React.createClass({
         return <input type='text' className='text' ref='input'/>;
     },
     componentDidMount:function(){
-        console.log(this.refs.input);
+        console.log(this.refs.input.type);
     },
     check:function(){
         console.log('我是组件中的方法');
@@ -42,7 +42,6 @@ var OutDiv = React.createClass({
     render:function(){
         return <Div ref={function(outDivNode){
             outDivNode.check();
-//            console.log(outDivNode)
         }}/>
     }
 

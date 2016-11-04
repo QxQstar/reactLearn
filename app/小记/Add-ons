@@ -1,0 +1,23 @@
+一.Add-ons概述
+1.React Add-ons 是一个有用的工具模块的集合，它被用于创建React app。
+    （1）TransitionGroup and CSSTransitionGroup, 用于处理动画和过渡通常不是简单的实现，比如在一个
+    组件被移除之前。
+    （2）LinkedStateMixin,用于通过一种简化的方式去协调用户表单输入和组件状态
+    （3）cloneWithProps，用于实现React组件的浅复制并且改变它们属性
+    （4）createFragment，用于创建一组外部键控的children
+    （5）update,一个helper方法，它用于更方便的处理javaScript中不可变的数据
+    （6）PureRenderMixin, 在某些情况下的性能助推器
+    （7）shallowCompare, 一个helper方法，它用于在组件的状态和属性之间进行浅比较，以至于确定
+    组件是否应该被更新
+2.要使用add-ons，还需要单独的通过npm安装它们，例如：你npm install react-addons-pure-render-mixin
+
+二.Add-ons详细介绍
+1.Animation的介绍
+    （1）React提供一个叫做ReactTransitionGroup的附加组件，它是一个用于animation的底层API
+    还有一个叫做ReactCSSTransitionGroup的附加组件，它能够简单的实现基于css的动画和过渡
+    （2）High-level API: ReactCSSTransitionGroup.
+    ReactCSSTransactionGroup组件是基于ReactTransactionGroup的。当React组件添加到DOM
+    或者从DOM中移除，它能够简单的执行css过渡和动画
+    （3）Getting Started
+    ReactCSSTransitionGroup 是 ReactTransitions的接口。它是一个简单的元素，它包裹
+    所有你想实现动画的组件

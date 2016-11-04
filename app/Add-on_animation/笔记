@@ -1,0 +1,174 @@
+动画
+React为动画提供了一个附加组件ReactTransitionGroup，这个附加组件是动画的底层API，并且还提供了一个
+附件组件ReactCSSTransitionGroup，ReactCSSTransitionGroup能够简单的实现基于css的动画和转换
+一.高级API ReactCSSTransitionGroup
+ReactCSSTransitionGroup是一个基于ReactTransitionGroup的API，当一个React组件插入或者移除DOM
+时，它是一种简单的去执行css转换和动画的方法
+1.以一个demo举例
+ReactCSSTransitionGroup是ReactTransitions的接口，可以把它当做一个简单的元素，它包裹着
+所有想添加动画效果的React组件。下面有一个例子：
+    var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+    var React = require('react');
+    var ReactDOM = require('react-dom');
+    var data = ['one','two','three'];
+    var Control = React.createClass({
+        getInitialState:function(){
+            return {
+                'items':this.props.data
+            }
+        },
+        addItem:function(){
+            var newItems = this.state.items.concat('four');
+            this.setState({
+                'items':newItems
+            });
+        },
+        removeItem:function(i){
+            var newItems = this.state.items;
+            newItems.splice(i,1);
+            this.setState({
+                'items':newItems
+            });
+        },
+        render:function(){
+            var $this = this;
+            var List = this.state.items.map(function(value,index){
+                return <div key={value} onClick = {$this.removeItem.bind($this,index)}> { value}</div>
+            });
+            return (
+                <div>
+                    <button onClick={this.addItem}>add Item</button>
+                    <ReactCSSTransitionGroup
+                        transitionName='example'
+                        transitionEnterTimeout={500}
+                        transitionLeaveTimeout={300}>
+                        {List}
+                    </ReactCSSTransitionGroup>
+                </div>
+            )
+        }
+    });
+    ReactDOM.render(<Control data={data}/> ,document.getElementById('content'));
+    例子的解释：
+    （1）你需要用npm安装react-addons-css-transition-group，然后通过require在文件中
+    引入，然后赋给一个变量，在这里将这个变量命名为ReactCSSTransitionGroup，也可以不取别的名字
+    （2）为每一个ReactCSSTransitionGroup组件的子元素设置一个key属性，就算它只有一个子元素。
+    key值必须是唯一的。设置一个key属性是为了让react确定那个子元素插入了，移除了，或者保持
+    （3）在这个demo中，当一个新的子元素被添加到ReactCSSTransitionGroup中，它就会得到一个example-enter CSS类名
+    随后它又会得到一个example-enter-active CSS类名。这些类名基于transitionName属性值。
+    你能够使用这个类名去实现css动画。添加如下的css样式：
+    .example-enter {
+      opacity: 0.01;
+    }
+
+    .example-enter.example-enter-active {
+      opacity: 1;
+      transition: opacity 500ms ease-in;
+    }
+
+    .example-leave {
+      opacity: 1;
+    }
+
+    .example-leave.example-leave-active {
+      opacity: 0.01;
+      transition: opacity 300ms ease-in;
+    }
+    这些样式中transition-duration值必须与ReactCSSTransitionGroup组件的
+    transitionEnterTimeout和transitionLeaveTimeout属性值一一对应
+    （4）这个时候你点击'add Item'按钮将会以一种淡入的方式添加一个新的子元素，点击一个已经
+    存在的子元素，这个被点击的子元素将会以一种淡出的方式被移除。
+2.Animate Initial Mounting
+ReactCSSTransitionGroup提供了一个可选的属性transitionAppear，如果将这个属性设置为true，
+在组件的初始化装置就会添加一个额外的转换阶段。默认情况下transitionAppear为false，如下：
+    render: function() {
+        return (
+          <ReactCSSTransitionGroup transitionName="example" transitionAppear={true} transitionAppearTimeout={500}>
+            {list}
+          </ReactCSSTransitionGroup>
+        );
+      }
+      这样在初始化装载ReactCSSTransitionGroup时，它的每个子元素都会有一个example-appear CSS类
+      接着会有一个example-appear-active CSS类，如果添加如下的样式：
+      .example-appear {
+        opacity: 0.01;
+      }
+
+      .example-appear.example-appear-active {
+        opacity: 1;
+        transition: opacity .5s ease-in;
+      }
+      在ReactCSSTransitionGroup的装载阶段就会有一个淡入的动画。在初始化装载阶段，每一个
+      ReactCSSTransitionGroup子元素都是appear而不是enter，然而，子元素进入一个已经存在的
+      ReactCSSTransitionGroup，这个子元素是enter而不是appear
+3.自定义类名
+在上面的demo中，我们给transitionName属性设置了一个字符串example，所以，每一个阶段涉及的CSS
+类名都是以example开头的。我们也可以给transitionName设置一个字符串，这样可以为每一个阶段自定义
+类名，如下有两种设置方式：
+<ReactCSSTransitionGroup
+    transitionName={ {
+      enter: 'enter',
+      enterActive: 'enterActive',
+      leave: 'leave',
+      leaveActive: 'leaveActive',
+      appear: 'appear',
+      appearActive: 'appearActive'
+    } }>
+    {item}
+  </ReactCSSTransitionGroup>
+
+  <ReactCSSTransitionGroup
+    transitionName={ {
+      enter: 'enter',
+      leave: 'leave',
+      appear: 'appear'
+    } }>
+    {item2}
+  </ReactCSSTransitionGroup>
+4.Animation Group Must Be Mounted To Work
+为了让每一个子元素都有一个淡入和淡出的效果，子元素必须进入或离开一个已经被装载的ReactCSSTransitionGroup组件中，
+或者ReactCSSTransitionGroup的transitionAppear属性为true，下面这个例子就不会有淡入和淡出
+的效果，因为，ReactCSSTransitionGroup和一个新的子元素被单独装载，而不是子元素载入一个已经存在的
+ReactCSSTransitionGroup中。
+    render: function() {
+        var items = this.state.items.map(function(item, i) {
+          return (
+            <div key={item} onClick={this.handleRemove.bind(this, i)}>
+              <ReactCSSTransitionGroup transitionName="example">
+                {item}
+              </ReactCSSTransitionGroup>
+            </div>
+          );
+        }, this);
+        return (
+          <div>
+            <button onClick={this.handleAdd}>Add Item</button>
+            {items}
+          </div>
+        );
+      }
+5.一个或者0个子元素
+在上面的例子中ReactCSSTransitionGroup有多个子元素，实际上，ReactCSSTransitionGroup可以只有
+一个或者没有子元素，如下所示：
+    var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+
+    var ImageCarousel = React.createClass({
+      propTypes: {
+        imageSrc: React.PropTypes.string.isRequired
+      },
+      render: function() {
+        return (
+          <div>
+            <ReactCSSTransitionGroup transitionName="carousel" transitionEnterTimeout={300} transitionLeaveTimeout={300}>
+              <img src={this.props.imageSrc} key={this.props.imageSrc} />
+            </ReactCSSTransitionGroup>
+          </div>
+        );
+      }
+    });
+6.禁用动画
+如果你愿意，你能够禁用leave或者enter动画。例如，你想让子元素有一个enter动画而没有一个leave动画，
+但是在默认情况下，在你移除DOM节点之前，ReactCSSTransitionGroup会等待一个动画去完成。你能给
+ReactCSSTransitionGroup设置transitionEnter={false} 或者 transitionLeave={false}
+去禁用这些动画
+
